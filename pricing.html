@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pricing – SwiftHaul Dispatch</title>
+  <meta name="description" content="SwiftHaul transparent pricing plans starting from PKR 15,000 per month. Basic, Standard and Premium plans available for Pakistani truck drivers and fleet owners. No hidden fees.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg-primary:    #0a0e1a;
+      --bg-secondary:  #111827;
+      --bg-card:       #1f2937;
+      --accent:        #f97316;
+      --accent-hover:  #ea6c0a;
+      --text-white:    #ffffff;
+      --text-gray:     #9ca3af;
+      --text-light:    #d1d5db;
+      --border:        #374151;
+      --font-main:     'Montserrat', sans-serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-primary);
+      color: var(--text-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section-padding { padding: 90px 0; }
+
+    .section-tag {
+      display: inline-block;
+      background: rgba(249,115,22,0.15);
+      color: var(--accent);
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 50px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(249,115,22,0.3);
+    }
+    .section-title { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
+    .section-title span { color: var(--accent); }
+    .section-subtitle { font-size: 1rem; color: var(--text-gray); max-width: 560px; line-height: 1.8; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 6px;
+      font-family: var(--font-main); font-size: 0.9rem;
+      font-weight: 700; cursor: pointer; border: none;
+      transition: all 0.3s ease; letter-spacing: 0.5px;
+      width: 100%; justify-content: center;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(249,115,22,0.35); }
+    .btn-outline { background: transparent; color: var(--text-white); border: 2px solid var(--border); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .btn-ghost { background: rgba(249,115,22,0.12); color: var(--accent); border: 1px solid rgba(249,115,22,0.3); }
+    .btn-ghost:hover { background: var(--accent); color: #fff; transform: translateY(-2px); }
+    .btn-cta { width: auto; }
+    .btn-white { background: #fff; color: var(--accent); font-weight: 800; }
+    .btn-white:hover { background: #f3f4f6; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+    .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.6); }
+    .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000; padding: 18px 0;
+      background: transparent;
+      transition: all 0.3s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(10,14,26,0.97);
+      backdrop-filter: blur(12px);
+      padding: 12px 0;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 1.3rem; font-weight: 900; letter-spacing: -0.5px; }
+    .nav-logo .logo-icon { width: 40px; height: 40px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-links a { font-size: 0.88rem; font-weight: 600; color: var(--text-light); letter-spacing: 0.3px; transition: color 0.2s; position: relative; }
+    .nav-links a.active { color: var(--accent); }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; }
+    .nav-links a:hover { color: var(--text-white); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-cta { display: flex; align-items: center; gap: 12px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text-white); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-primary); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 1.4rem; font-weight: 700; color: var(--text-white); transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-close { position: absolute; top: 24px; right: 24px; font-size: 1.8rem; cursor: pointer; color: var(--text-gray); }
+    /* ============================================================
+       HERO SECTION
+    ============================================================ */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(10,14,26,0.96) 0%, rgba(10,14,26,0.85) 50%, rgba(249,115,22,0.08) 100%),
+        url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&q=80') center/cover no-repeat;
+      z-index: 0;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(249,115,22,0.12) 0%, transparent 60%);
+    }
+
+    /* Animated grid lines */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(249,115,22,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(249,115,22,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 1;
+      animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(60px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 120px 0 80px;
+      max-width: 720px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(249,115,22,0.12);
+      border: 1px solid rgba(249,115,22,0.3);
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      animation: fadeInDown 0.8s ease forwards;
+    }
+
+    .hero-badge .dot {
+      width: 7px; height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+      animation: fadeInUp 0.9s ease 0.1s both;
+    }
+
+    .hero-title .accent { color: var(--accent); }
+
+    .hero-title .underline-orange {
+      position: relative;
+      display: inline-block;
+    }
+    .hero-title .underline-orange::after {
+      content: '';
+      position: absolute;
+      bottom: 2px; left: 0; right: 0;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-gray);
+      line-height: 1.9;
+      margin-bottom: 40px;
+      max-width: 580px;
+      animation: fadeInUp 0.9s ease 0.2s both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.9s ease 0.3s both;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-gray);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollAnim 2s ease infinite;
+    }
+
+    @keyframes scrollAnim {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 160px 0 80px;
+      min-height: 100vh;
+      background:
+        linear-gradient(135deg, rgba(10,14,26,0.96) 0%, rgba(10,14,26,0.85) 50%, rgba(249,115,22,0.09) 100%),
+        url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&q=80') center/cover no-repeat;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(249,115,22,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(249,115,22,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .page-hero-content { position: relative; z-index: 1; text-align: center; max-width: 700px; margin: 0 auto; }
+    .page-hero-content .section-tag { animation: fadeInDown 0.8s ease forwards; }
+    .page-hero-content h1 { animation: fadeInUp 0.9s ease 0.1s both; }
+    .page-hero-content p { animation: fadeInUp 0.9s ease 0.2s both; }
+    .page-hero-content .breadcrumb { animation: fadeInUp 0.9s ease 0.3s both; }
+    .page-hero-content h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; }
+    .page-hero-content h1 span { color: var(--accent); }
+    .page-hero-content p { font-size: 1.05rem; color: var(--text-gray); line-height: 1.9; margin-bottom: 28px; }
+    .breadcrumb { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.82rem; color: var(--text-gray); }
+    .breadcrumb a { color: var(--accent); font-weight: 600; }
+    .breadcrumb i { font-size: 0.65rem; }
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* BILLING TOGGLE */
+    .pricing-section { background: var(--bg-primary); }
+    .pricing-header { text-align: center; margin-bottom: 56px; }
+    .pricing-header .section-subtitle { margin: 0 auto 32px; }
+    .toggle-wrap { display: inline-flex; align-items: center; gap: 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 50px; padding: 6px 20px; }
+    .toggle-label { font-size: 0.85rem; font-weight: 700; color: var(--text-gray); transition: color 0.3s; }
+    .toggle-label.active { color: var(--text-white); }
+    .toggle-switch { position: relative; width: 48px; height: 26px; background: var(--bg-primary); border: 2px solid var(--border); border-radius: 50px; cursor: pointer; transition: background 0.3s; }
+    .toggle-switch.on { background: var(--accent); border-color: var(--accent); }
+    .toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: #fff; border-radius: 50%; transition: transform 0.3s; }
+    .toggle-switch.on::after { transform: translateX(22px); }
+    .save-badge { background: rgba(249,115,22,0.15); color: var(--accent); font-size: 0.7rem; font-weight: 800; padding: 3px 10px; border-radius: 50px; letter-spacing: 0.5px; border: 1px solid rgba(249,115,22,0.3); }
+
+    /* PRICING CARDS */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; align-items: stretch; }
+    .pricing-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 40px 32px; position: relative; transition: all 0.3s; display: flex; flex-direction: column; }
+    .pricing-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(0,0,0,0.35); }
+    .pricing-card.popular { border-color: var(--accent); background: linear-gradient(145deg, #1f2937 0%, #1a2535 100%); transform: scale(1.04); box-shadow: 0 20px 60px rgba(249,115,22,0.2); }
+    .pricing-card.popular:hover { transform: scale(1.04) translateY(-8px); }
+    .popular-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 0.72rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 20px; border-radius: 50px; white-space: nowrap; box-shadow: 0 4px 16px rgba(249,115,22,0.4); }
+    .plan-icon { width: 56px; height: 56px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 20px; }
+    .plan-icon.bronze { background: rgba(180,120,60,0.15); color: #b4783c; }
+    .plan-icon.gold { background: rgba(249,115,22,0.15); color: var(--accent); }
+    .plan-icon.plat { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+    .plan-name { font-size: 0.78rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--text-gray); margin-bottom: 6px; }
+    .plan-title { font-size: 1.4rem; font-weight: 900; margin-bottom: 4px; }
+    .plan-price-box { margin: 20px 0 24px; }
+    .plan-price { display: flex; align-items: flex-start; gap: 4px; line-height: 1; }
+    .price-currency { font-size: 0.85rem; font-weight: 800; color: var(--accent); margin-top: 8px; }
+    .price-number { font-size: 3.4rem; font-weight: 900; color: var(--text-white); }
+    .price-period { font-size: 0.82rem; color: var(--text-gray); font-weight: 600; align-self: flex-end; margin-bottom: 8px; }
+    .plan-price-annual { display: none; }
+    .annual-mode .plan-price-monthly { display: none; }
+    .annual-mode .plan-price-annual { display: flex; }
+    .plan-desc { font-size: 0.85rem; color: var(--text-gray); margin-bottom: 28px; line-height: 1.7; }
+    .plan-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
+    .plan-features { flex: 1; margin-bottom: 28px; }
+    .plan-features li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.87rem; color: var(--text-light);
+      margin-bottom: 13px; line-height: 1.5;
+      border-radius: 6px; padding: 4px 6px; transition: background 0.3s;
+    }
+    .plan-features li i { font-size: 0.75rem; margin-top: 3px; flex-shrink: 0; }
+    .plan-features li i.yes { color: #22c55e; }
+    .plan-features li i.no { color: #4b5563; }
+    .plan-features li.disabled { color: #4b5563; }
+    .plan-note { font-size: 0.78rem; color: var(--text-gray); text-align: center; margin-top: 14px; }
+
+    /* HIGHLIGHT FLASH */
+    .highlight-flash {
+      background: rgba(249,115,22,0.25) !important;
+      border-radius: 6px;
+      padding: 4px 8px !important;
+      animation: flashFade 3s ease forwards;
+      color: var(--text-white) !important;
+    }
+    @keyframes flashFade {
+      0%   { background: rgba(249,115,22,0.4); }
+      40%  { background: rgba(249,115,22,0.25); }
+      100% { background: transparent; }
+    }
+    #view-pricing {
+  scroll-margin-top: 90px;
+}
+
+    /* COMPARE TABLE */
+    .compare-section { background: var(--bg-secondary); }
+    .compare-header { text-align: center; margin-bottom: 56px; }
+    .compare-header .section-subtitle { margin: 0 auto; }
+    .compare-table-wrap { overflow-x: auto; }
+    .compare-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 14px; overflow: hidden; }
+    .compare-table thead tr { background: var(--bg-card); }
+    .compare-table th { padding: 18px 24px; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-gray); text-align: center; border-bottom: 1px solid var(--border); }
+    .compare-table th:first-child { text-align: left; color: var(--text-light); }
+    .compare-table th.highlight { color: var(--accent); }
+    .compare-table tbody tr { transition: background 0.2s; }
+    .compare-table tbody tr:hover { background: rgba(249,115,22,0.04); }
+    .compare-table tbody tr.group-header { background: rgba(249,115,22,0.06); }
+    .compare-table tbody tr.group-header td { font-size: 0.75rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); padding: 14px 24px; }
+    .compare-table td { padding: 14px 24px; font-size: 0.88rem; color: var(--text-light); border-bottom: 1px solid rgba(55,65,81,0.5); text-align: center; }
+    .compare-table td:first-child { text-align: left; color: var(--text-light); font-weight: 600; }
+    .compare-table td .yes-icon { color: #22c55e; font-size: 1rem; }
+    .compare-table td .no-icon { color: #374151; font-size: 1rem; }
+    .compare-table td .highlight-col { color: var(--accent); font-weight: 700; }
+
+    /* ADD-ONS */
+    .addons { background: var(--bg-primary); }
+    .addons-header { text-align: center; margin-bottom: 56px; }
+    .addons-header .section-subtitle { margin: 0 auto; }
+    .addons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .addon-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 32px 28px; transition: all 0.3s; position: relative; overflow: hidden; }
+    .addon-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+    .addon-card:hover { border-color: rgba(249,115,22,0.4); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .addon-card:hover::before { transform: scaleX(1); }
+    .addon-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+    .addon-card h4 { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
+    .addon-card p { font-size: 0.85rem; color: var(--text-gray); line-height: 1.8; margin-bottom: 16px; }
+    .addon-price { font-size: 1.1rem; font-weight: 900; color: var(--accent); margin-bottom: 16px; }
+    .addon-price span { font-size: 0.78rem; color: var(--text-gray); font-weight: 500; }
+
+    /* TRUST STRIP */
+    .trust-strip { background: var(--bg-secondary); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 40px 0; }
+    .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+    .trust-item { display: flex; align-items: center; gap: 14px; padding: 0 32px; border-right: 1px solid var(--border); }
+    .trust-item:last-child { border-right: none; }
+    .trust-icon { width: 46px; height: 46px; min-width: 46px; background: rgba(249,115,22,0.12); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 1.1rem; }
+    .trust-text strong { display: block; font-size: 0.9rem; font-weight: 800; margin-bottom: 2px; }
+    .trust-text span { font-size: 0.78rem; color: var(--text-gray); }
+
+    /* TESTIMONIALS */
+    .testimonials { background: var(--bg-primary); }
+    .test-header { text-align: center; margin-bottom: 56px; }
+    .test-header .section-subtitle { margin: 0 auto; }
+    .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .test-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; transition: all 0.3s; }
+    .test-card:hover { border-color: rgba(249,115,22,0.3); transform: translateY(-4px); box-shadow: 0 16px 32px rgba(0,0,0,0.25); }
+    .test-stars { display: flex; gap: 4px; margin-bottom: 14px; }
+    .test-stars i { color: var(--accent); font-size: 0.85rem; }
+    .test-quote { font-size: 0.88rem; color: var(--text-light); line-height: 1.9; margin-bottom: 20px; font-style: italic; }
+    .test-author { display: flex; align-items: center; gap: 12px; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; color: #fff; }
+    .author-name { font-size: 0.88rem; font-weight: 700; }
+    .author-plan { font-size: 0.75rem; color: var(--accent); margin-top: 2px; font-weight: 600; }
+
+    /* FAQ */
+    .faq-section { background: var(--bg-secondary); }
+    .faq-header { text-align: center; margin-bottom: 56px; }
+    .faq-header .section-subtitle { margin: 0 auto; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 960px; margin: 0 auto; }
+    .faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; transition: border-color 0.3s; }
+    .faq-item.open { border-color: rgba(249,115,22,0.4); }
+    .faq-question { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; cursor: pointer; font-size: 0.9rem; font-weight: 700; color: var(--text-white); gap: 12px; }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon { width: 26px; height: 26px; min-width: 26px; background: rgba(249,115,22,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 0.7rem; transition: transform 0.3s, background 0.3s; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--accent); color: #fff; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; padding: 0 22px; }
+    .faq-item.open .faq-answer { max-height: 180px; padding: 0 22px 18px; }
+    .faq-answer p { font-size: 0.85rem; color: var(--text-gray); line-height: 1.85; }
+
+    /* CTA BANNER */
+    .cta-banner { background: linear-gradient(135deg, var(--accent) 0%, #c2410c 100%); position: relative; overflow: hidden; }
+    .cta-banner::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    .cta-inner { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+    .cta-text h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; margin-bottom: 8px; }
+    .cta-text p { font-size: 1rem; color: rgba(255,255,255,0.85); }
+    .cta-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* FOOTER */
+    .footer { background: #060910; border-top: 1px solid var(--border); padding: 60px 0 0; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-brand p { font-size: 0.88rem; color: var(--text-gray); line-height: 1.8; margin-bottom: 20px; }
+    .footer-socials { display: flex; gap: 10px; }
+    .social-icon { width: 38px; height: 38px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-gray); font-size: 0.9rem; transition: all 0.3s; }
+    .social-icon:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: translateY(-3px); }
+    .footer-col h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 20px; color: var(--text-white); letter-spacing: 0.5px; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: 0.85rem; color: var(--text-gray); transition: color 0.2s; display: flex; align-items: center; gap: 6px; }
+    .footer-col ul li a:hover { color: var(--accent); }
+    .footer-col ul li a i { font-size: 0.7rem; }
+    .footer-contact-item { display: flex; gap: 10px; margin-bottom: 12px; align-items: flex-start; }
+    .footer-contact-item i { color: var(--accent); font-size: 0.85rem; margin-top: 3px; }
+    .footer-contact-item span { font-size: 0.85rem; color: var(--text-gray); line-height: 1.6; }
+    .footer-bottom { border-top: 1px solid var(--border); padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 0.82rem; color: var(--text-gray); }
+    .footer-bottom span { color: var(--accent); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .pricing-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+      .pricing-card.popular { transform: scale(1); }
+      .pricing-card.popular:hover { transform: translateY(-8px); }
+      .addons-grid { grid-template-columns: 1fr 1fr; }
+      .trust-grid { grid-template-columns: 1fr 1fr; }
+      .trust-item:nth-child(2) { border-right: none; }
+      .trust-item:nth-child(3) { border-right: 1px solid var(--border); padding-top: 24px; }
+      .trust-item:nth-child(4) { padding-top: 24px; }
+      .test-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .addons-grid { grid-template-columns: 1fr; }
+      .trust-grid { grid-template-columns: 1fr 1fr; }
+      .cta-inner { flex-direction: column; text-align: center; }
+      .cta-actions { justify-content: center; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .trust-grid { grid-template-columns: 1fr; }
+      .trust-item { border-right: none; border-bottom: 1px solid var(--border); padding: 16px 0; }
+      .trust-item:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon"><i class="fas fa-truck-fast"></i></div>
+        Swift<span>Haul</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="pricing.html" class="active">Pricing</a></li>
+        <li><a href="register.html">Join as Driver</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="contact.html#get-quote" class="btn btn-primary btn-cta"><i class="fas fa-paper-plane"></i> Get a Quote</a>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <span class="mobile-close" id="mobileClose"><i class="fas fa-times"></i></span>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="register.html">Join as Driver</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html#get-quote" class="btn btn-primary btn-cta">Get a Quote</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-content">
+        <div class="section-tag">Simple Pricing</div>
+        <h1>Transparent Plans, <span>Zero Surprises</span></h1>
+        <p>No hidden fees. No long contracts. Just straightforward pricing that scales with your business — whether you're running one truck or a whole fleet.</p>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>Pricing</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- PRICING CARDS -->
+  <section class="pricing-section section-padding" id="view-pricing">
+    <div class="container">
+      <div class="pricing-header">
+        <div class="section-tag">Our Plans</div>
+        <h2 class="section-title">Choose Your <span>Plan</span></h2>
+        <p class="section-subtitle">All plans include a dedicated dispatcher, full load booking, and 24/7 support. Pick the level that fits your operation.</p>
+        <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin-top: 28px;">
+          <span class="toggle-label active" id="label-monthly">Monthly</span>
+          <div class="toggle-wrap" style="padding: 0; background: transparent; border: none;">
+            <div class="toggle-switch" id="billingToggle"></div>
+          </div>
+          <span class="toggle-label" id="label-annual">Annual</span>
+          <span class="save-badge">Save 20%</span>
+        </div>
+      </div>
+
+      <div class="pricing-grid" id="pricingGrid">
+
+        <!-- BASIC -->
+        <div class="pricing-card reveal">
+          <div class="plan-icon bronze"><i class="fas fa-truck"></i></div>
+          <div class="plan-name">Starter</div>
+          <div class="plan-title">Basic Plan</div>
+          <p class="plan-desc">Perfect for new owner-operators getting started. Covers all the essentials to keep your truck moving.</p>
+          <div class="plan-price-box">
+            <div class="plan-price plan-price-monthly">
+              <span class="price-currency">PKR</span>
+              <span class="price-number">15,000</span>
+              <span class="price-period">/ month</span>
+            </div>
+            <div class="plan-price plan-price-annual">
+              <span class="price-currency">PKR</span>
+              <span class="price-number">12,000</span>
+              <span class="price-period">/ month</span>
+            </div>
+          </div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><i class="fas fa-check-circle yes"></i> 1 Truck / Owner-Operator</li>
+            <li data-service="load-booking"><i class="fas fa-check-circle yes"></i> Load Booking (up to 20 loads/mo)</li>
+            <li data-service="route-planning"><i class="fas fa-check-circle yes"></i> Basic Route Planning</li>
+            <li data-service="documentation"><i class="fas fa-check-circle yes"></i> Documentation Handling</li>
+            <li data-service="driver-support"><i class="fas fa-check-circle yes"></i> Email & Text Support</li>
+            <li data-service="dispatch"><i class="fas fa-check-circle yes"></i> Weekday Dispatch (Mon–Fri)</li>
+            <li class="disabled"><i class="fas fa-times-circle no"></i> 24/7 Live Dispatcher</li>
+            <li class="disabled"><i class="fas fa-times-circle no"></i> Broker Negotiation</li>
+            <li class="disabled"><i class="fas fa-times-circle no"></i> Fleet Management</li>
+          </ul>
+          <a href="register.html#registration-form" class="btn btn-ghost">Get Started <i class="fas fa-arrow-right"></i></a>
+          <p class="plan-note">No setup fee. Cancel anytime.</p>
+        </div>
+
+        <!-- STANDARD (Popular) -->
+        <div class="pricing-card popular reveal">
+          <div class="popular-badge">⭐ Most Popular</div>
+          <div class="plan-icon gold"><i class="fas fa-star"></i></div>
+          <div class="plan-name">Professional</div>
+          <div class="plan-title">Standard Plan</div>
+          <p class="plan-desc">The sweet spot for serious owner-operators who want maximum earnings with full support around the clock.</p>
+          <div class="plan-price-box">
+            <div class="plan-price plan-price-monthly">
+              <span class="price-currency">PKR</span>
+              <span class="price-number">35,000</span>
+              <span class="price-period">/ month</span>
+            </div>
+            <div class="plan-price plan-price-annual">
+              <span class="price-currency">PKR</span>
+              <span class="price-number">28,000</span>
+              <span class="price-period">/ month</span>
+            </div>
+          </div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><i class="fas fa-check-circle yes"></i> Up to 3 Trucks</li>
+            <li data-service="load-booking"><i class="fas fa-check-circle yes"></i> Unlimited Load Booking</li>
+            <li data-service="route-planning"><i class="fas fa-check-circle yes"></i> Advanced Route Planning</li>
+            <li data-service="documentation"><i class="fas fa-check-circle yes"></i> Full Documentation Handling</li>
+            <li data-service="driver-support"><i class="fas fa-check-circle yes"></i> 24/7 Phone & Text Support</li>
+            <li data-service="dispatch"><i class="fas fa-check-circle yes"></i> 7-Day Dispatch Coverage</li>
+            <li><i class="fas fa-check-circle yes"></i> Broker Rate Negotiation</li>
+            <li><i class="fas fa-check-circle yes"></i> Dedicated Personal Dispatcher</li>
+            <li class="disabled"><i class="fas fa-times-circle no"></i> Fleet Management Dashboard</li>
+          </ul>
+          <a href="register.html#registration-form" class="btn btn-primary">Get Started <i class="fas fa-arrow-right"></i></a>
+          <p class="plan-note">No setup fee. Cancel anytime.</p>
+        </div>
+
+        <!-- PREMIUM -->
+        <div class="pricing-card reveal">
+          <div class="plan-icon plat"><i class="fas fa-crown"></i></div>
+          <div class="plan-name">Enterprise</div>
+          <div class="plan-title">Premium Plan</div>
+          <p class="plan-desc">Built for fleet owners who need maximum coverage, dedicated staff, and a fully managed dispatching operation.</p>
+          <div class="plan-price-box">
+            <div class="plan-price plan-price-monthly">
+              <span class="price-currency">PKR</span>
+              <span class="price-number">75,000</span>
+              <span class="price-period">/ month</span>
+            </div>
+            <div class="plan-price plan-price-annual">
+              <span class="price-currency">PKR</span>
+              <span class="price-number">60,000</span>
+              <span class="price-period">/ month</span>
+            </div>
+          </div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><i class="fas fa-check-circle yes"></i> Unlimited Trucks / Fleet</li>
+            <li data-service="load-booking"><i class="fas fa-check-circle yes"></i> Unlimited Load Booking + Priority</li>
+            <li data-service="route-planning"><i class="fas fa-check-circle yes"></i> Priority Route Planning</li>
+            <li data-service="documentation"><i class="fas fa-check-circle yes"></i> Full Documentation Handling</li>
+            <li data-service="driver-support"><i class="fas fa-check-circle yes"></i> 24/7 Dedicated Dispatcher</li>
+            <li data-service="dispatch"><i class="fas fa-check-circle yes"></i> 7-Day Dispatch Coverage</li>
+            <li><i class="fas fa-check-circle yes"></i> Aggressive Broker Negotiation</li>
+            <li><i class="fas fa-check-circle yes"></i> Fleet Management Dashboard</li>
+            <li><i class="fas fa-check-circle yes"></i> Monthly Performance Reports</li>
+          </ul>
+          <a href="contact.html#get-quote" class="btn btn-ghost">Contact for Fleet Quote <i class="fas fa-arrow-right"></i></a>
+          <p class="plan-note">Custom fleet pricing available.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARE TABLE -->
+  <section class="compare-section section-padding">
+    <div class="container">
+      <div class="compare-header">
+        <div class="section-tag">Full Comparison</div>
+        <h2 class="section-title">What's Included in <span>Each Plan</span></h2>
+        <p class="section-subtitle">A complete side-by-side breakdown of everything each plan includes.</p>
+      </div>
+      <div class="compare-table-wrap reveal">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Basic</th>
+              <th class="highlight">Standard ⭐</th>
+              <th>Premium</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="group-header"><td colspan="4">Dispatch & Load Booking</td></tr>
+            <tr><td>Number of Trucks</td><td>1</td><td class="highlight-col">Up to 3</td><td>Unlimited</td></tr>
+            <tr><td>Load Booking</td><td>20 loads/mo</td><td class="highlight-col">Unlimited</td><td>Unlimited + Priority</td></tr>
+            <tr><td>Dispatch Days</td><td>Mon – Fri</td><td class="highlight-col">7 Days</td><td>7 Days</td></tr>
+            <tr><td>Dedicated Dispatcher</td><td><i class="fas fa-times-circle no-icon"></i></td><td><i class="fas fa-check-circle yes-icon"></i></td><td><i class="fas fa-check-circle yes-icon"></i></td></tr>
+            <tr class="group-header"><td colspan="4">Support & Communication</td></tr>
+            <tr><td>24/7 Live Support</td><td><i class="fas fa-times-circle no-icon"></i></td><td><i class="fas fa-check-circle yes-icon"></i></td><td><i class="fas fa-check-circle yes-icon"></i></td></tr>
+            <tr><td>Email & Text Support</td><td><i class="fas fa-check-circle yes-icon"></i></td><td><i class="fas fa-check-circle yes-icon"></i></td><td><i class="fas fa-check-circle yes-icon"></i></td></tr>
+            <tr><td>Broker Communication</td><td>Basic</td><td class="highlight-col">Full</td><td>Full + Aggressive</td></tr>
+            <tr class="group-header"><td colspan="4">Documentation & Admin</td></tr>
+            <tr><td>Shipment & Delivery Document Handling</td><td><i class="fas fa-check-circle yes-icon"></i></td><td><i class="fas fa-check-circle yes-icon"></i></td><td><i class="fas fa-check-circle yes-icon"></i></td></tr>
+            <tr><td>Invoice Submission</td><td><i class="fas fa-check-circle yes-icon"></i></td><td><i class="fas fa-check-circle yes-icon"></i></td><td><i class="fas fa-check-circle yes-icon"></i></td></tr>
+            <tr><td>Rate Negotiation</td><td><i class="fas fa-times-circle no-icon"></i></td><td><i class="fas fa-check-circle yes-icon"></i></td><td><i class="fas fa-check-circle yes-icon"></i></td></tr>
+            <tr class="group-header"><td colspan="4">Fleet & Reporting</td></tr>
+            <tr><td>Fleet Management Dashboard</td><td><i class="fas fa-times-circle no-icon"></i></td><td><i class="fas fa-times-circle no-icon"></i></td><td><i class="fas fa-check-circle yes-icon"></i></td></tr>
+            <tr><td>Monthly Performance Reports</td><td><i class="fas fa-times-circle no-icon"></i></td><td><i class="fas fa-times-circle no-icon"></i></td><td><i class="fas fa-check-circle yes-icon"></i></td></tr>
+            <tr><td>Custom Fleet Pricing</td><td><i class="fas fa-times-circle no-icon"></i></td><td><i class="fas fa-times-circle no-icon"></i></td><td><i class="fas fa-check-circle yes-icon"></i></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADD-ONS -->
+  <section class="addons section-padding">
+    <div class="container">
+      <div class="addons-header">
+        <div class="section-tag">Optional Extras</div>
+        <h2 class="section-title">Power Up With <span>Add-Ons</span></h2>
+        <p class="section-subtitle">Add extra features to any plan based on what your business needs.</p>
+        <p class="section-subtitle" style="margin: 8px auto 0; color: var(--accent);">💡 Click "Add to My Plan" and we'll pre-fill your quote form with that add-on — just fill in the rest!</p>
+      </div>
+      <div class="addons-grid">
+        <div class="addon-card reveal">
+          <span class="addon-icon">⚡</span>
+          <h4>Express Load Finding</h4>
+          <p>Need a load found in under 2 hours? Add express priority load booking to any plan for urgent availability.</p>
+          <div class="addon-price">+PKR 3,000 <span>/ month</span></div>
+          <a href="contact.html?addon=Express+Load+Finding#get-quote" class="btn btn-ghost">Add to My Plan</a>
+        </div>
+        <div class="addon-card reveal">
+          <span class="addon-icon">📊</span>
+          <h4>Weekly Earnings Report</h4>
+          <p>Get a detailed weekly breakdown of your loads, earnings, kilometers driven, and rate-per-kilometer performance.</p>
+          <div class="addon-price">+PKR 1,500 <span>/ month</span></div>
+          <a href="contact.html?addon=Weekly+Earnings+Report#get-quote" class="btn btn-ghost">Add to My Plan</a>
+        </div>
+        <div class="addon-card reveal">
+          <span class="addon-icon">🧾</span>
+          <h4>Payment Follow-Up Service</h4>
+          <p>We follow up with brokers and shippers on your behalf to make sure your payments are received on time every time.</p>
+          <div class="addon-price">+PKR 2,000 <span>/ month</span></div>
+          <a href="contact.html?addon=Payment+Follow-Up+Service#get-quote" class="btn btn-ghost">Add to My Plan</a>
+        </div>
+        <div class="addon-card reveal">
+          <span class="addon-icon">🤝</span>
+          <h4>New Broker Setup</h4>
+          <p>Want to work with a new broker? We handle the company profile, setup, and approval process for you.</p>
+          <div class="addon-price">+PKR 1,500 <span>/ broker</span></div>
+          <a href="contact.html?addon=New+Broker+Setup#get-quote" class="btn btn-ghost">Add to My Plan</a>
+        </div>
+        <div class="addon-card reveal">
+          <span class="addon-icon">📱</span>
+          <h4>WhatsApp Dispatch Updates</h4>
+          <p>Receive real-time load updates, confirmations, and alerts directly on WhatsApp — no app needed.</p>
+          <div class="addon-price">Free <span>with Standard & Premium</span></div>
+          <a href="contact.html?addon=WhatsApp+Dispatch+Updates#get-quote" class="btn btn-ghost">Add to My Plan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="trust-strip">
+    <div class="container">
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fas fa-lock"></i></div>
+          <div class="trust-text"><strong>No Hidden Fees</strong><span>What you see is what you pay</span></div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fas fa-calendar-xmark"></i></div>
+          <div class="trust-text"><strong>Cancel Anytime</strong><span>No long-term commitment</span></div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fas fa-headset"></i></div>
+          <div class="trust-text"><strong>24/7 Support</strong><span>Standard & Premium plans</span></div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fas fa-shield-halved"></i></div>
+          <div class="trust-text"><strong>Verified Brokers Only</strong><span>Every load is screened</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="faq-section section-padding">
+    <div class="container">
+      <div class="faq-header">
+        <div class="section-tag">FAQ</div>
+        <h2 class="section-title">Pricing <span>Questions</span></h2>
+        <p class="section-subtitle">Everything you need to know about our pricing and billing.</p>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item open">
+          <div class="faq-question">Is there a setup or onboarding fee? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+          <div class="faq-answer"><p>No — there are zero setup fees on any plan. You pay only the monthly plan price starting from your first active month. Onboarding is completely free.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Can I switch plans later? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+          <div class="faq-answer"><p>Yes, you can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle with no penalties or fees.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">What happens if I miss a payment? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+          <div class="faq-answer"><p>We'll notify you with a 3-day grace period before any service interruption. We work with our drivers — just reach out and we'll find a solution together.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Do you charge a percentage of my loads? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+          <div class="faq-answer"><p>No — unlike many dispatchers who take a cut of every load, SwiftHaul charges a flat monthly fee. Everything you earn beyond that is 100% yours to keep.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Is the annual plan billed upfront? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+          <div class="faq-answer"><p>Yes, the annual plan is billed once per year and gives you a 20% discount compared to month-to-month billing. It's ideal if you're committed to growing your operation.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Do you offer custom pricing for large fleets? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+          <div class="faq-answer"><p>Absolutely. For fleets of 10 or more trucks, we offer fully custom pricing. Contact us directly and we'll build a package that makes sense for your operation.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner section-padding">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-text">
+          <h2>Start Your Free Onboarding Today</h2>
+          <p>Pick a plan, register your truck, and we'll have your first load within 24 hours.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="register.html#registration-form" class="btn btn-white btn-cta"><i class="fas fa-truck"></i> Register Now</a>
+          <a href="contact.html#get-quote" class="btn btn-outline-white btn-cta"><i class="fas fa-phone"></i> Talk to Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <div class="logo-icon"><i class="fas fa-truck-fast"></i></div>
+            Swift<span>Haul</span>
+          </a>
+          <p>Professional truck dispatching services for owner-operators and fleet owners across Pakistan. Available 24/7 to keep your business moving.</p>
+          <div class="footer-socials">
+            <a href="contact.html" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="contact.html" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="contact.html" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            <a href="contact.html" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+            <li><a href="pricing.html"><i class="fas fa-chevron-right"></i> Pricing</a></li>
+            <li><a href="register.html"><i class="fas fa-chevron-right"></i> Driver Registration</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="services.html#load-booking"><i class="fas fa-chevron-right"></i> Load Booking</a></li>
+            <li><a href="services.html#route-planning"><i class="fas fa-chevron-right"></i> Route Planning</a></li>
+            <li><a href="services.html#driver-support"><i class="fas fa-chevron-right"></i> Driver Support</a></li>
+            <li><a href="services.html#documentation"><i class="fas fa-chevron-right"></i> Documentation</a></li>
+            <li><a href="services.html#dispatch"><i class="fas fa-chevron-right"></i> 24/7 Dispatch</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <div class="footer-contact-item"><i class="fas fa-phone"></i><span>+92 300 1234567</span></div>
+          <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>dispatch@swifthaul.com</span></div>
+          <div class="footer-contact-item"><i class="fas fa-location-dot"></i><span>Lahore<br>Pakistan</span></div>
+          <div class="footer-contact-item"><i class="fas fa-clock"></i><span>Available 24/7</span></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 <span>SwiftHaul Dispatch</span>. All rights reserved.</p>
+        <p>Built for drivers, by people who care about the road.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileClose');
+    hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+    mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+    const toggle = document.getElementById('billingToggle');
+    const labelMonthly = document.getElementById('label-monthly');
+    const labelAnnual = document.getElementById('label-annual');
+    const grid = document.getElementById('pricingGrid');
+    let isAnnual = false;
+    toggle.addEventListener('click', () => {
+      isAnnual = !isAnnual;
+      toggle.classList.toggle('on', isAnnual);
+      grid.classList.toggle('annual-mode', isAnnual);
+      labelMonthly.classList.toggle('active', !isAnnual);
+      labelAnnual.classList.toggle('active', isAnnual);
+    });
+
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    window.addEventListener('load', () => {
+      const params = new URLSearchParams(window.location.search);
+      const highlight = params.get('highlight');
+      if (highlight) {
+        setTimeout(() => {
+          const items = document.querySelectorAll(`[data-service="${highlight}"]`);
+          if (items.length > 0) {
+            items.forEach(el => el.classList.add('highlight-flash'));
+            items[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 800);
+      }
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+</body>
+</html>

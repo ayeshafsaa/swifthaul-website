@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Driver Registration – SwiftHaul Dispatch</title>
+  <meta name="description" content="Register your truck with SwiftHaul Pakistan today. Fill out our quick driver registration form and get your first load within 24 hours. Free onboarding, no long contracts.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg-primary:    #0a0e1a;
+      --bg-secondary:  #111827;
+      --bg-card:       #1f2937;
+      --accent:        #f97316;
+      --accent-hover:  #ea6c0a;
+      --text-white:    #ffffff;
+      --text-gray:     #9ca3af;
+      --text-light:    #d1d5db;
+      --border:        #374151;
+      --input-bg:      #161d2e;
+      --font-main:     'Montserrat', sans-serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-primary);
+      color: var(--text-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section-padding { padding: 90px 0; }
+
+    .section-tag {
+      display: inline-block;
+      background: rgba(249,115,22,0.15);
+      color: var(--accent);
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 50px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(249,115,22,0.3);
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800; line-height: 1.2; margin-bottom: 16px;
+    }
+    .section-title span { color: var(--accent); }
+    .section-subtitle {
+      font-size: 1rem; color: var(--text-gray);
+      max-width: 560px; line-height: 1.8;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 6px;
+      font-family: var(--font-main); font-size: 0.9rem;
+      font-weight: 700; cursor: pointer; border: none;
+      transition: all 0.3s ease; letter-spacing: 0.5px;
+      width: 100%; justify-content: center;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(249,115,22,0.35); }
+    .btn-outline { background: transparent; color: var(--text-white); border: 2px solid var(--border); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .btn-ghost { background: rgba(249,115,22,0.12); color: var(--accent); border: 1px solid rgba(249,115,22,0.3); }
+    .btn-ghost:hover { background: var(--accent); color: #fff; transform: translateY(-2px); }
+    .btn-cta { width: auto; }
+    .btn-white { background: #fff; color: var(--accent); font-weight: 800; }
+    .btn-white:hover { background: #f3f4f6; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+    .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.6); }
+    .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000; padding: 18px 0;
+      background: transparent;
+      transition: all 0.3s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(10,14,26,0.97);
+      backdrop-filter: blur(12px);
+      padding: 12px 0;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.3rem; font-weight: 900; letter-spacing: -0.5px;
+    }
+    .nav-logo .logo-icon {
+      width: 40px; height: 40px; background: var(--accent);
+      border-radius: 8px; display: flex; align-items: center;
+      justify-content: center; font-size: 1.1rem;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-links a {
+      font-size: 0.88rem; font-weight: 600; color: var(--text-light);
+      letter-spacing: 0.3px; transition: color 0.2s; position: relative;
+    }
+    .nav-links a.active { color: var(--accent); }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px; background: var(--accent); transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--text-white); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-cta { display: flex; align-items: center; gap: 12px; }
+    .btn-nav {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 6px;
+      font-family: var(--font-main); font-size: 0.88rem;
+      font-weight: 700; cursor: pointer; border: none;
+      transition: all 0.3s ease; background: var(--accent); color: #fff;
+    }
+    .btn-nav:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(249,115,22,0.35); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text-white); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg-primary); z-index: 999;
+      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 1.4rem; font-weight: 700; color: var(--text-white); transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-close { position: absolute; top: 24px; right: 24px; font-size: 1.8rem; cursor: pointer; color: var(--text-gray); }
+    /* ============================================================
+       HERO SECTION
+    ============================================================ */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(10,14,26,0.96) 0%, rgba(10,14,26,0.85) 50%, rgba(249,115,22,0.08) 100%),
+        url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&q=80') center/cover no-repeat;
+      z-index: 0;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(249,115,22,0.12) 0%, transparent 60%);
+    }
+
+    /* Animated grid lines */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(249,115,22,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(249,115,22,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 1;
+      animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(60px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 120px 0 80px;
+      max-width: 720px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(249,115,22,0.12);
+      border: 1px solid rgba(249,115,22,0.3);
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      animation: fadeInDown 0.8s ease forwards;
+    }
+
+    .hero-badge .dot {
+      width: 7px; height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+      animation: fadeInUp 0.9s ease 0.1s both;
+    }
+
+    .hero-title .accent { color: var(--accent); }
+
+    .hero-title .underline-orange {
+      position: relative;
+      display: inline-block;
+    }
+    .hero-title .underline-orange::after {
+      content: '';
+      position: absolute;
+      bottom: 2px; left: 0; right: 0;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-gray);
+      line-height: 1.9;
+      margin-bottom: 40px;
+      max-width: 580px;
+      animation: fadeInUp 0.9s ease 0.2s both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.9s ease 0.3s both;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-gray);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollAnim 2s ease infinite;
+    }
+
+    @keyframes scrollAnim {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 160px 0 80px;
+      min-height: 100vh;
+      background:
+        linear-gradient(135deg, rgba(10,14,26,0.96) 0%, rgba(10,14,26,0.85) 50%, rgba(249,115,22,0.09) 100%),
+        url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&q=80') center/cover no-repeat;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(249,115,22,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(249,115,22,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .page-hero-content { position: relative; z-index: 1; text-align: center; max-width: 700px; margin: 0 auto; }
+    .page-hero-content .section-tag { animation: fadeInDown 0.8s ease forwards; }
+    .page-hero-content h1 { animation: fadeInUp 0.9s ease 0.1s both; }
+    .page-hero-content p { animation: fadeInUp 0.9s ease 0.2s both; }
+    .page-hero-content .breadcrumb { animation: fadeInUp 0.9s ease 0.3s both; }
+    .page-hero-content h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 900;
+      line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px;
+    }
+    .page-hero-content h1 span { color: var(--accent); }
+    .page-hero-content p { font-size: 1.05rem; color: var(--text-gray); line-height: 1.9; margin-bottom: 28px; }
+    .breadcrumb { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.82rem; color: var(--text-gray); }
+    .breadcrumb a { color: var(--accent); font-weight: 600; }
+    .breadcrumb i { font-size: 0.65rem; }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* BENEFITS STRIP */
+    .benefits-strip {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 0;
+    }
+    .benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+    .benefit-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 0 28px; border-right: 1px solid var(--border);
+    }
+    .benefit-item:last-child { border-right: none; }
+    .benefit-icon {
+      width: 40px; height: 40px; min-width: 40px;
+      background: rgba(249,115,22,0.12); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); font-size: 0.95rem;
+    }
+    .benefit-item strong { display: block; font-size: 0.88rem; font-weight: 800; margin-bottom: 2px; }
+    .benefit-item span { font-size: 0.76rem; color: var(--text-gray); }
+    
+    #registration-form {
+  scroll-margin-top: 90px;
+}
+    /* REGISTRATION SECTION */
+    .registration-section { background: var(--bg-primary); }
+    
+    .reg-inner { display: grid; grid-template-columns: 1fr 1.8fr; gap: 60px; align-items: start; }
+    .reg-info { position: sticky; top: 100px; }
+    .reg-info .section-subtitle { margin-bottom: 32px; }
+    .steps-mini { margin-bottom: 36px; }
+    .step-mini { display: flex; gap: 14px; margin-bottom: 20px; align-items: flex-start; }
+    .step-mini-num {
+      width: 36px; height: 36px; min-width: 36px;
+      background: rgba(249,115,22,0.12);
+      border: 1px solid rgba(249,115,22,0.3);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 900; color: var(--accent);
+    }
+    .step-mini-text strong { display: block; font-size: 0.9rem; font-weight: 800; margin-bottom: 2px; }
+    .step-mini-text span { font-size: 0.82rem; color: var(--text-gray); line-height: 1.6; }
+    .reg-contact-box {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px 22px;
+    }
+    .reg-contact-box p { font-size: 0.82rem; color: var(--text-gray); margin-bottom: 12px; }
+    .reg-contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.85rem; }
+    .reg-contact-item i { color: var(--accent); width: 16px; }
+
+    /* FORM CARD */
+    .form-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px 40px;
+    }
+    .form-progress { display: flex; align-items: center; margin-bottom: 40px; gap: 0; }
+    .progress-step {
+      display: flex; flex-direction: column; align-items: center;
+      flex: 1; position: relative; cursor: pointer;
+    }
+    .progress-step::after {
+      content: ''; position: absolute;
+      top: 18px; left: 50%; width: 100%; height: 2px;
+      background: var(--border); z-index: 0;
+    }
+    .progress-step:last-child::after { display: none; }
+    .progress-step.active::after, .progress-step.done::after { background: var(--accent); }
+    .step-dot {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--bg-primary); border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 800; color: var(--text-gray);
+      position: relative; z-index: 1; transition: all 0.3s;
+    }
+    .progress-step.active .step-dot {
+      background: var(--accent); border-color: var(--accent);
+      color: #fff; box-shadow: 0 0 0 6px rgba(249,115,22,0.2);
+    }
+    .progress-step.done .step-dot { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .step-label {
+      font-size: 0.7rem; font-weight: 700; color: var(--text-gray);
+      margin-top: 8px; letter-spacing: 0.5px; text-transform: uppercase; text-align: center;
+    }
+    .progress-step.active .step-label { color: var(--accent); }
+    .progress-step.done .step-label { color: var(--accent); }
+
+    .form-step { display: none; }
+    .form-step.active { display: block; }
+    .form-step-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 6px; }
+    .form-step-title span { color: var(--accent); }
+    .form-step-sub { font-size: 0.85rem; color: var(--text-gray); margin-bottom: 28px; }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 7px; }
+    .form-group.span2 { grid-column: span 2; }
+
+    label { font-size: 0.8rem; font-weight: 700; color: var(--text-light); letter-spacing: 0.3px; }
+    label .required { color: var(--accent); margin-left: 2px; }
+
+    input, select, textarea {
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 13px 16px;
+      font-family: var(--font-main);
+      font-size: 0.88rem;
+      color: var(--text-white);
+      transition: border-color 0.3s, box-shadow 0.3s;
+      width: 100%;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    input::placeholder, textarea::placeholder { color: #4b5563; }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(249,115,22,0.12);
+    }
+    select option { background: var(--bg-card); color: var(--text-white); }
+    textarea { resize: vertical; min-height: 110px; }
+
+    .input-icon-wrap { position: relative; }
+    .input-icon-wrap input, .input-icon-wrap select { padding-left: 44px; }
+    .input-icon {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      color: var(--accent); font-size: 0.85rem; pointer-events: none;
+    }
+
+    .error-msg { font-size: 0.75rem; color: #ef4444; display: none; }
+    .form-group.has-error .error-msg { display: block; }
+    .form-group.has-error input,
+    .form-group.has-error select,
+    .form-group.has-error textarea { border-color: #ef4444; }
+
+    .checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .checkbox-item { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .checkbox-item input[type="checkbox"] {
+      width: 18px; height: 18px; min-width: 18px;
+      accent-color: var(--accent); cursor: pointer; padding: 0;
+    }
+    .checkbox-item span { font-size: 0.85rem; color: var(--text-light); }
+
+    .radio-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .radio-item {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; padding: 12px 10px;
+      background: var(--input-bg); border: 1px solid var(--border);
+      border-radius: 8px; cursor: pointer; transition: all 0.3s;
+      font-size: 0.83rem; font-weight: 600; color: var(--text-gray);
+    }
+    .radio-item:has(input:checked) {
+      border-color: var(--accent); background: rgba(249,115,22,0.1); color: var(--accent);
+    }
+    .radio-item input[type="radio"] { display: none; }
+
+    .form-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 36px; gap: 14px; }
+    .btn-form {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 8px;
+      font-family: var(--font-main); font-size: 0.9rem;
+      font-weight: 700; cursor: pointer; border: none;
+      transition: all 0.3s ease;
+    }
+    .btn-next { background: var(--accent); color: #fff; margin-left: auto; }
+    .btn-next:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(249,115,22,0.35); }
+    .btn-back { background: transparent; color: var(--text-gray); border: 1px solid var(--border); }
+    .btn-back:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .btn-submit { background: var(--accent); color: #fff; margin-left: auto; width: auto; }
+    .btn-submit:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(249,115,22,0.35); }
+
+    .step-counter { font-size: 0.8rem; color: var(--text-gray); font-weight: 600; }
+    .step-counter span { color: var(--accent); font-weight: 800; }
+
+    .terms-check {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--input-bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px; margin-top: 8px;
+    }
+    .terms-check input[type="checkbox"] {
+      width: 18px; height: 18px; min-width: 18px;
+      accent-color: var(--accent); margin-top: 1px; cursor: pointer; padding: 0;
+    }
+    .terms-check p { font-size: 0.82rem; color: var(--text-gray); line-height: 1.7; }
+    .terms-check p a { color: var(--accent); font-weight: 600; }
+
+    /* SUCCESS STATE */
+    .success-state { display: none; text-align: center; padding: 40px 0; }
+    .success-state.show { display: block; }
+    .success-icon {
+      width: 88px; height: 88px; background: rgba(34,197,94,0.12);
+      border: 3px solid #22c55e; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem; color: #22c55e; margin: 0 auto 28px;
+      animation: successPop 0.5s ease forwards;
+    }
+    @keyframes successPop {
+      0% { transform: scale(0); opacity: 0; }
+      70% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .success-state h3 { font-size: 1.7rem; font-weight: 900; margin-bottom: 12px; }
+    .success-state h3 span { color: var(--accent); }
+    .success-state p { font-size: 0.95rem; color: var(--text-gray); line-height: 1.8; max-width: 440px; margin: 0 auto 28px; }
+    .success-steps { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 32px; }
+    .success-step {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      background: var(--bg-primary); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px 20px; min-width: 130px;
+    }
+    .success-step i { color: var(--accent); font-size: 1.3rem; }
+    .success-step span { font-size: 0.8rem; color: var(--text-gray); font-weight: 600; text-align: center; }
+
+    /* ============================================================
+       REQUIREMENTS — lighter feel
+    ============================================================ */
+    .requirements { background: var(--bg-secondary); }
+    .req-header { text-align: center; margin-bottom: 56px; }
+    .req-header .section-subtitle { margin: 0 auto; }
+    .req-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .req-card {
+      background: var(--bg-secondary);
+      border: 1px solid rgba(249,115,22,0.2);
+      border-radius: 14px; padding: 32px 28px; transition: all 0.3s;
+    }
+    .req-card:hover {
+      border-color: rgba(249,115,22,0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.2);
+      background: rgba(249,115,22,0.04);
+    }
+    .req-card-icon {
+      width: 52px; height: 52px; background: rgba(249,115,22,0.12);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      color: var(--accent); font-size: 1.2rem; margin-bottom: 18px; transition: all 0.3s;
+    }
+    .req-card:hover .req-card-icon { background: var(--accent); color: #fff; }
+    .req-card h4 { font-size: 1rem; font-weight: 800; margin-bottom: 14px; color: var(--text-white); }
+    .req-card ul li {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 0.84rem; color: var(--text-light);
+      margin-bottom: 10px; line-height: 1.6;
+    }
+    .req-card ul li i { color: var(--accent); font-size: 0.7rem; margin-top: 5px; flex-shrink: 0; }
+
+    /* CTA BANNER */
+    .cta-banner { background: linear-gradient(135deg, var(--accent) 0%, #c2410c 100%); position: relative; overflow: hidden; }
+    .cta-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cta-inner { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+    .cta-text h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; margin-bottom: 8px; }
+    .cta-text p { font-size: 1rem; color: rgba(255,255,255,0.85); }
+    .cta-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-white { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 6px; font-family: var(--font-main); font-size: 0.9rem; font-weight: 800; cursor: pointer; border: none; transition: all 0.3s; background: #fff; color: var(--accent); }
+    .btn-white:hover { background: #f3f4f6; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+    .btn-outline-white { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 6px; font-family: var(--font-main); font-size: 0.9rem; font-weight: 700; cursor: pointer; background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.6); transition: all 0.3s; }
+    .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+    /* FOOTER */
+    .footer { background: #060910; border-top: 1px solid var(--border); padding: 60px 0 0; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-brand p { font-size: 0.88rem; color: var(--text-gray); line-height: 1.8; margin-bottom: 20px; }
+    .footer-socials { display: flex; gap: 10px; }
+    .social-icon { width: 38px; height: 38px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-gray); font-size: 0.9rem; transition: all 0.3s; }
+    .social-icon:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: translateY(-3px); }
+    .footer-col h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 20px; color: var(--text-white); letter-spacing: 0.5px; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: 0.85rem; color: var(--text-gray); transition: color 0.2s; display: flex; align-items: center; gap: 6px; }
+    .footer-col ul li a:hover { color: var(--accent); }
+    .footer-col ul li a i { font-size: 0.7rem; }
+    .footer-contact-item { display: flex; gap: 10px; margin-bottom: 12px; align-items: flex-start; }
+    .footer-contact-item i { color: var(--accent); font-size: 0.85rem; margin-top: 3px; }
+    .footer-contact-item span { font-size: 0.85rem; color: var(--text-gray); line-height: 1.6; }
+    .footer-bottom { border-top: 1px solid var(--border); padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 0.82rem; color: var(--text-gray); }
+    .footer-bottom span { color: var(--accent); }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .reg-inner { grid-template-columns: 1fr; }
+      .reg-info { position: static; }
+      .req-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .benefits-grid { grid-template-columns: 1fr 1fr; }
+      .benefit-item:nth-child(2) { border-right: none; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .form-card { padding: 32px 24px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.span2 { grid-column: span 1; }
+      .radio-group { grid-template-columns: 1fr 1fr; }
+      .checkbox-group { grid-template-columns: 1fr; }
+      .req-grid { grid-template-columns: 1fr; }
+      .cta-inner { flex-direction: column; text-align: center; }
+      .cta-actions { justify-content: center; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .benefit-item { border-right: none; border-bottom: 1px solid var(--border); padding: 14px 0; }
+      .benefit-item:last-child { border-bottom: none; }
+    }
+    @media (max-width: 480px) {
+      .radio-group { grid-template-columns: 1fr; }
+      .form-progress { gap: 0; }
+      .step-label { font-size: 0.6rem; }
+      .success-steps { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon"><i class="fas fa-truck-fast"></i></div>
+        Swift<span>Haul</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="register.html" class="active">Join as Driver</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="contact.html#get-quote" class="btn btn-primary btn-cta"><i class="fas fa-paper-plane"></i> Get a Quote</a>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <span class="mobile-close" id="mobileClose"><i class="fas fa-times"></i></span>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="register.html">Join as Driver</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html#get-quote" class="btn btn-primary btn-cta">Get a Quote</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-content">
+        <div class="section-tag">Join the Network</div>
+        <h1>Register Your Truck, <span>Start Earning More</span></h1>
+        <p>Fill out the form below and a dedicated SwiftHaul dispatcher will be in touch within 24 hours to get you loaded and moving across Pakistan.</p>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>Driver Registration</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- BENEFITS STRIP -->
+  <div class="benefits-strip">
+    <div class="container">
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fas fa-bolt"></i></div>
+          <div>
+            <strong>First Load in 24hrs</strong>
+            <span>Fast onboarding guaranteed</span>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fas fa-file-circle-check"></i></div>
+          <div>
+            <strong>Free Onboarding</strong>
+            <span>No setup fee ever</span>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fas fa-headset"></i></div>
+          <div>
+            <strong>Dedicated Dispatcher</strong>
+            <span>Assigned within 24 hours</span>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fas fa-calendar-xmark"></i></div>
+          <div>
+            <strong>No Long Contracts</strong>
+            <span>Cancel anytime, no penalty</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGISTRATION FORM -->
+  <section class="registration-section section-padding"id="registration-form">
+    <div class="container">
+      <div class="reg-inner">
+
+        <!-- LEFT INFO -->
+        <div class="reg-info reveal">
+          <div class="section-tag">How It Works</div>
+          <h2 class="section-title">3 Steps to <span>Get Started</span></h2>
+          <p class="section-subtitle" style="margin-bottom:28px;">The whole process takes less than 5 minutes. Once you submit, we handle everything else.</p>
+          <div class="steps-mini">
+            <div class="step-mini">
+              <div class="step-mini-num">1</div>
+              <div class="step-mini-text">
+                <strong>Fill the Form</strong>
+                <span>Tell us about yourself, your truck, and your preferred routes. Takes about 5 minutes.</span>
+              </div>
+            </div>
+            <div class="step-mini">
+              <div class="step-mini-num">2</div>
+              <div class="step-mini-text">
+                <strong>We Review & Call You</strong>
+                <span>A dispatcher reviews your profile and calls you within 24 hours to discuss your needs.</span>
+              </div>
+            </div>
+            <div class="step-mini">
+              <div class="step-mini-num">3</div>
+              <div class="step-mini-text">
+                <strong>Start Hauling</strong>
+                <span>Sign the dispatcher agreement and we'll have your first load lined up immediately.</span>
+              </div>
+            </div>
+          </div>
+          <div class="reg-contact-box">
+            <p>Prefer to talk first? Reach us directly:</p>
+            <div class="reg-contact-item"><i class="fas fa-phone"></i> +92 300 1234567</div>
+            <div class="reg-contact-item"><i class="fas fa-envelope"></i> dispatch@swifthaul.com</div>
+            <div class="reg-contact-item"><i class="fab fa-whatsapp"></i> WhatsApp: +92 300 1234567</div>
+          </div>
+        </div>
+
+        <!-- RIGHT FORM -->
+        <div class="form-card reveal">
+          <div class="form-progress">
+            <div class="progress-step active" data-step="1">
+              <div class="step-dot">1</div>
+              <div class="step-label">Personal</div>
+            </div>
+            <div class="progress-step" data-step="2">
+              <div class="step-dot">2</div>
+              <div class="step-label">Truck Info</div>
+            </div>
+            <div class="progress-step" data-step="3">
+              <div class="step-dot">3</div>
+              <div class="step-label">Preferences</div>
+            </div>
+            <div class="progress-step" data-step="4">
+              <div class="step-dot">4</div>
+              <div class="step-label">Review</div>
+            </div>
+          </div>
+
+          <form id="registrationForm" novalidate>
+
+            <!-- STEP 1 -->
+            <div class="form-step active" id="step1">
+              <h3 class="form-step-title">Personal <span>Information</span></h3>
+              <p class="form-step-sub">Tell us a bit about yourself so we can create your driver profile.</p>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>First Name <span class="required">*</span></label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" id="firstName" placeholder="e.g. Ali" />
+                  </div>
+                  <span class="error-msg">Please enter your first name</span>
+                </div>
+                <div class="form-group">
+                  <label>Last Name <span class="required">*</span></label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" id="lastName" placeholder="e.g. Khan" />
+                  </div>
+                  <span class="error-msg">Please enter your last name</span>
+                </div>
+                <div class="form-group">
+                  <label>Email Address <span class="required">*</span></label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-envelope input-icon"></i>
+                    <input type="email" id="email" placeholder="ali@email.com" />
+                  </div>
+                  <span class="error-msg">Please enter a valid email</span>
+                </div>
+                <div class="form-group">
+                  <label>Phone Number <span class="required">*</span></label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-phone input-icon"></i>
+                    <input type="tel" id="phone" placeholder="+92 300 0000000" />
+                  </div>
+                  <span class="error-msg">Please enter your phone number</span>
+                </div>
+                <div class="form-group">
+                  <label>Driving License Number <span class="required">*</span></label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-id-card input-icon"></i>
+                    <input type="text" id="licenseNumber" placeholder="e.g. LHR-123456" />
+                  </div>
+                  <span class="error-msg">Please enter your license number</span>
+                </div>
+                <div class="form-group">
+                  <label>Years of Experience <span class="required">*</span></label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-calendar input-icon"></i>
+                    <select id="experience">
+                      <option value="" disabled selected>Select experience</option>
+                      <option>Less than 1 year</option>
+                      <option>1 – 2 years</option>
+                      <option>3 – 5 years</option>
+                      <option>6 – 10 years</option>
+                      <option>10+ years</option>
+                    </select>
+                  </div>
+                  <span class="error-msg">Please select your experience</span>
+                </div>
+                <div class="form-group">
+                  <label>Province of Operation <span class="required">*</span></label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-location-dot input-icon"></i>
+                    <select id="province">
+                      <option value="" disabled selected>Select your province</option>
+                      <option>Punjab</option>
+                      <option>Sindh</option>
+                      <option>Khyber Pakhtunkhwa (KPK)</option>
+                      <option>Balochistan</option>
+                      <option>Azad Kashmir</option>
+                      <option>Gilgit-Baltistan</option>
+                      <option>Islamabad Capital Territory</option>
+                    </select>
+                  </div>
+                  <span class="error-msg">Please select your province</span>
+                </div>
+                <div class="form-group">
+                  <label>CNIC Number <span class="required">*</span></label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-hashtag input-icon"></i>
+                    <input type="text" id="cnicNumber" placeholder="e.g. 35201-1234567-1" />
+                  </div>
+                  <span class="error-msg">Please enter your CNIC number</span>
+                </div>
+              </div>
+              <div class="form-nav">
+                <span class="step-counter">Step <span>1</span> of 4</span>
+                <button type="button" class="btn-form btn-next" onclick="nextStep(1)">Next Step <i class="fas fa-arrow-right"></i></button>
+              </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="form-step" id="step2">
+              <h3 class="form-step-title">Truck <span>Information</span></h3>
+              <p class="form-step-sub">Tell us about your equipment so we can match you with the right loads.</p>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Truck Type <span class="required">*</span></label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-truck input-icon"></i>
+                    <select id="truckType">
+                      <option value="" disabled selected>Select truck type</option>
+                      <option>Dry Van (Closed Body)</option>
+                      <option>Reefer (Refrigerated)</option>
+                      <option>Flatbed (Open Body)</option>
+                      <option>Tanker</option>
+                      <option>Mini Truck / Pickup</option>
+                      <option>Container Truck</option>
+                      <option>Tipper / Dump Truck</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <span class="error-msg">Please select your truck type</span>
+                </div>
+                <div class="form-group">
+                  <label>Truck Year</label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-calendar-days input-icon"></i>
+                    <input type="number" id="truckYear" placeholder="e.g. 2018" min="1990" max="2026" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Truck Make / Brand</label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-industry input-icon"></i>
+                    <select id="truckMake">
+                      <option value="" disabled selected>Select make</option>
+                      <option>Hino</option>
+                      <option>Isuzu</option>
+                      <option>FAW</option>
+                      <option>Shacman</option>
+                      <option>MAN</option>
+                      <option>Volvo</option>
+                      <option>Mercedes-Benz</option>
+                      <option>Nissan</option>
+                      <option>Tata</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Number of Trucks <span class="required">*</span></label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-hashtag input-icon"></i>
+                    <select id="numTrucks">
+                      <option value="" disabled selected>How many trucks?</option>
+                      <option>1 (Owner-Operator)</option>
+                      <option>2 – 3 Trucks</option>
+                      <option>4 – 10 Trucks</option>
+                      <option>10+ Trucks (Fleet)</option>
+                    </select>
+                  </div>
+                  <span class="error-msg">Please select number of trucks</span>
+                </div>
+                <div class="form-group span2">
+                  <label>Truck Capacity</label>
+                  <div class="radio-group">
+                    <label class="radio-item"><input type="radio" name="capacity" value="1-5 tons"> 1 – 5 Tons</label>
+                    <label class="radio-item"><input type="radio" name="capacity" value="5-15 tons" checked> 5 – 15 Tons</label>
+                    <label class="radio-item"><input type="radio" name="capacity" value="15+ tons"> 15+ Tons</label>
+                  </div>
+                </div>
+                <div class="form-group span2">
+                  <label>Do you own your truck?</label>
+                  <div class="radio-group">
+                    <label class="radio-item"><input type="radio" name="ownership" value="yes"> Yes, I own it</label>
+                    <label class="radio-item"><input type="radio" name="ownership" value="no"> No, I lease</label>
+                    <label class="radio-item"><input type="radio" name="ownership" value="both"> Both</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-nav">
+                <button type="button" class="btn-form btn-back" onclick="prevStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
+                <span class="step-counter">Step <span>2</span> of 4</span>
+                <button type="button" class="btn-form btn-next" onclick="nextStep(2)">Next Step <i class="fas fa-arrow-right"></i></button>
+              </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="form-step" id="step3">
+              <h3 class="form-step-title">Route <span>Preferences</span></h3>
+              <p class="form-step-sub">Help us understand your goals so we can find the right loads for you.</p>
+              <div class="form-grid">
+                <div class="form-group span2">
+                  <label>Preferred Routes / Regions <span class="required">*</span></label>
+                  <div class="checkbox-group">
+                    <label class="checkbox-item"><input type="checkbox" value="Punjab"> <span>Punjab</span></label>
+                    <label class="checkbox-item"><input type="checkbox" value="Sindh"> <span>Sindh</span></label>
+                    <label class="checkbox-item"><input type="checkbox" value="KPK"> <span>Khyber Pakhtunkhwa</span></label>
+                    <label class="checkbox-item"><input type="checkbox" value="Balochistan"> <span>Balochistan</span></label>
+                    <label class="checkbox-item"><input type="checkbox" value="Karachi-Lahore"> <span>Karachi – Lahore Route</span></label>
+                    <label class="checkbox-item"><input type="checkbox" value="Nationwide"> <span>Nationwide (All Routes)</span></label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Desired Rate Per Kilometre <span class="required">*</span></label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-money-bill input-icon"></i>
+                    <select id="ratePerKm">
+                      <option value="" disabled selected>Select target rate</option>
+                      <option>PKR 50 – 80 / km</option>
+                      <option>PKR 80 – 120 / km</option>
+                      <option>PKR 120 – 160 / km</option>
+                      <option>PKR 160+ / km</option>
+                    </select>
+                  </div>
+                  <span class="error-msg">Please select your rate preference</span>
+                </div>
+                <div class="form-group">
+                  <label>Home Time Preference</label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-house input-icon"></i>
+                    <select id="homeTime">
+                      <option value="" disabled selected>Select preference</option>
+                      <option>Daily home time (local routes)</option>
+                      <option>Weekends home</option>
+                      <option>Every 2 weeks</option>
+                      <option>Flexible (long routes)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Preferred Plan</label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-tag input-icon"></i>
+                    <select id="preferredPlan">
+                      <option value="" disabled selected>Select a plan</option>
+                      <option>Basic – PKR 15,000/mo</option>
+                      <option>Standard – PKR 35,000/mo</option>
+                      <option>Premium – PKR 75,000/mo</option>
+                      <option>Not sure yet</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>How Did You Hear About Us?</label>
+                  <div class="input-icon-wrap">
+                    <i class="fas fa-search input-icon"></i>
+                    <select id="referral">
+                      <option value="" disabled selected>Select source</option>
+                      <option>Google Search</option>
+                      <option>Facebook / Instagram</option>
+                      <option>Referral from another driver</option>
+                      <option>YouTube</option>
+                      <option>WhatsApp Group</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group span2">
+                  <label>Additional Message / Notes</label>
+                  <textarea id="message" placeholder="Tell us anything else — special requirements, questions, your current situation, etc."></textarea>
+                </div>
+              </div>
+              <div class="form-nav">
+                <button type="button" class="btn-form btn-back" onclick="prevStep(3)"><i class="fas fa-arrow-left"></i> Back</button>
+                <span class="step-counter">Step <span>3</span> of 4</span>
+                <button type="button" class="btn-form btn-next" onclick="nextStep(3)">Review & Submit <i class="fas fa-arrow-right"></i></button>
+              </div>
+            </div>
+
+            <!-- STEP 4 -->
+            <div class="form-step" id="step4">
+              <h3 class="form-step-title">Review & <span>Confirm</span></h3>
+              <p class="form-step-sub">Please review your information before submitting your registration.</p>
+              <div id="summaryBox" style="background: var(--input-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;" id="summaryContent"></div>
+              </div>
+              <div class="form-group">
+                <label>Terms & Agreement <span class="required">*</span></label>
+                <div class="terms-check">
+                  <input type="checkbox" id="termsCheck" />
+                  <p>I confirm that all information provided is accurate. I agree to the <a href="#" onclick="openModal('dispatcher-modal'); return false;">Dispatcher Agreement</a> and <a href="#" onclick="openModal('privacy-modal'); return false;">Privacy Policy</a>
+                <span class="error-msg" id="termsError" style="display:none;">You must agree to the terms to continue</span>
+              </div>
+              <div class="form-nav">
+                <button type="button" class="btn-form btn-back" onclick="prevStep(4)"><i class="fas fa-arrow-left"></i> Edit</button>
+                <span class="step-counter">Step <span>4</span> of 4</span>
+                <button type="button" class="btn-form btn-submit" onclick="submitForm()">
+                  <i class="fas fa-paper-plane"></i> Submit Registration
+                </button>
+              </div>
+            </div>
+
+          </form>
+
+          <!-- SUCCESS STATE -->
+          <div class="success-state" id="successState">
+            <div class="success-icon"><i class="fas fa-check"></i></div>
+            <h3>You're <span>Registered!</span></h3>
+            <p>Thank you for joining SwiftHaul. A dedicated dispatcher will review your profile and call you within 24 hours to get you set up and moving.</p>
+            <div class="success-steps">
+              <div class="success-step"><i class="fas fa-phone"></i><span>Dispatcher calls within 24hrs</span></div>
+              <div class="success-step"><i class="fas fa-file-signature"></i><span>Sign dispatcher agreement</span></div>
+              <div class="success-step"><i class="fas fa-box-open"></i><span>First load booked</span></div>
+              <div class="success-step"><i class="fas fa-road"></i><span>Hit the road & earn</span></div>
+            </div>
+            <a href="index.html" class="btn-form btn-next" style="margin: 0 auto; width: auto;">
+              <i class="fas fa-home"></i> Back to Home
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- FULL WIDTH SUCCESS STATE -->
+<section id="fullSuccessSection" style="display:none; background: var(--bg-primary); padding: 100px 0;">
+  <div class="container">
+    <div style="max-width: 680px; margin: 0 auto; text-align: center;">
+
+      <!-- Success Icon -->
+      <div style="width: 100px; height: 100px; background: rgba(34,197,94,0.12); border: 3px solid #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.6rem; color: #22c55e; margin: 0 auto 32px; animation: successPop 0.5s ease forwards;">
+        <i class="fas fa-check"></i>
+      </div>
+
+      <!-- Heading -->
+      <div class="section-tag" style="margin-bottom: 20px;">Registration Successful</div>
+      <h2 style="font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; margin-bottom: 16px;">
+        You're <span style="color: var(--accent);">Registered!</span>
+      </h2>
+      <p style="font-size: 1rem; color: var(--text-gray); line-height: 1.9; margin-bottom: 40px;">
+        Thank you for joining SwiftHaul. A dedicated dispatcher will review your profile and call you within 24 hours to get you set up and moving across Pakistan.
+      </p>
+
+      <!-- What happens next steps -->
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 40px; text-align: left;">
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; display: flex; gap: 14px; align-items: flex-start;">
+          <div style="width: 40px; height: 40px; min-width: 40px; background: rgba(249,115,22,0.12); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div>
+            <div style="font-size: 0.88rem; font-weight: 800; margin-bottom: 4px;">Dispatcher Calls You</div>
+            <div style="font-size: 0.8rem; color: var(--text-gray); line-height: 1.6;">A dedicated dispatcher will call you within 24 hours to discuss your profile.</div>
+          </div>
+        </div>
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; display: flex; gap: 14px; align-items: flex-start;">
+          <div style="width: 40px; height: 40px; min-width: 40px; background: rgba(249,115,22,0.12); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">
+            <i class="fas fa-file-signature"></i>
+          </div>
+          <div>
+            <div style="font-size: 0.88rem; font-weight: 800; margin-bottom: 4px;">Sign Agreement</div>
+            <div style="font-size: 0.8rem; color: var(--text-gray); line-height: 1.6;">You'll receive and sign a simple dispatcher agreement to confirm the partnership.</div>
+          </div>
+        </div>
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; display: flex; gap: 14px; align-items: flex-start;">
+          <div style="width: 40px; height: 40px; min-width: 40px; background: rgba(249,115,22,0.12); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">
+            <i class="fas fa-box-open"></i>
+          </div>
+          <div>
+            <div style="font-size: 0.88rem; font-weight: 800; margin-bottom: 4px;">First Load Booked</div>
+            <div style="font-size: 0.8rem; color: var(--text-gray); line-height: 1.6;">We'll find and book your first load immediately — you could be rolling within 24 hours.</div>
+          </div>
+        </div>
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; display: flex; gap: 14px; align-items: flex-start;">
+          <div style="width: 40px; height: 40px; min-width: 40px; background: rgba(249,115,22,0.12); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">
+            <i class="fas fa-road"></i>
+          </div>
+          <div>
+            <div style="font-size: 0.88rem; font-weight: 800; margin-bottom: 4px;">Hit the Road & Earn</div>
+            <div style="font-size: 0.8rem; color: var(--text-gray); line-height: 1.6;">Drive, earn, and let SwiftHaul handle all the paperwork and dispatching behind the scenes.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+        <a href="index.html" class="btn-form btn-next" style="width: auto; margin: 0;">
+          <i class="fas fa-home"></i> Back to Home
+        </a>
+        <a href="contact.html" class="btn-form btn-back" style="border: 1px solid var(--border);">
+          <i class="fas fa-envelope"></i> Contact Us
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- REQUIREMENTS -->
+  <section class="requirements section-padding">
+    <div class="container">
+      <div class="req-header">
+        <div class="section-tag">What You Need</div>
+        <h2 class="section-title">Registration <span>Requirements</span></h2>
+        <p class="section-subtitle" style="margin: 0 auto;">Make sure you have these documents and qualifications ready before registering.</p>
+      </div>
+      <div class="req-grid">
+        <div class="req-card reveal">
+          <div class="req-card-icon"><i class="fas fa-id-card"></i></div>
+          <h4>Licensing & Documents</h4>
+          <ul>
+            <li><i class="fas fa-check"></i> Valid Heavy Vehicle Driving License</li>
+            <li><i class="fas fa-check"></i> Original CNIC (National Identity Card)</li>
+            <li><i class="fas fa-check"></i> Clean driving record</li>
+            <li><i class="fas fa-check"></i> Vehicle Registration Documents</li>
+          </ul>
+        </div>
+        <div class="req-card reveal">
+          <div class="req-card-icon"><i class="fas fa-shield-halved"></i></div>
+          <h4>Insurance Requirements</h4>
+          <ul>
+            <li><i class="fas fa-check"></i> Valid truck insurance policy</li>
+            <li><i class="fas fa-check"></i> Cargo insurance (recommended)</li>
+            <li><i class="fas fa-check"></i> Third party liability coverage</li>
+            <li><i class="fas fa-check"></i> Route permit where required</li>
+          </ul>
+        </div>
+        <div class="req-card reveal">
+          <div class="req-card-icon"><i class="fas fa-truck"></i></div>
+          <h4>Equipment Requirements</h4>
+          <ul>
+            <li><i class="fas fa-check"></i> Truck in good working condition</li>
+            <li><i class="fas fa-check"></i> Valid fitness certificate</li>
+            <li><i class="fas fa-check"></i> Smart phone for load communication</li>
+            <li><i class="fas fa-check"></i> WhatsApp for dispatcher updates</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner section-padding">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-text">
+          <h2>Have Questions Before Signing Up?</h2>
+          <p>Our team is happy to answer any questions before you register. Reach out anytime.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="contact.html#get-quote" class="btn-white"><i class="fas fa-phone"></i> Contact Us</a>
+          <a href="pricing.html#view-pricing" class="btn-outline-white"><i class="fas fa-tag"></i> View Pricing</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <div class="logo-icon"><i class="fas fa-truck-fast"></i></div>
+            Swift<span>Haul</span>
+          </a>
+          <p>Professional truck dispatching services for owner-operators and fleet owners across Pakistan. Available 24/7 to keep your business moving.</p>
+          <div class="footer-socials">
+            <a href="contact.html" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="contact.html" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="contact.html" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            <a href="contact.html" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+            <li><a href="pricing.html"><i class="fas fa-chevron-right"></i> Pricing</a></li>
+            <li><a href="register.html"><i class="fas fa-chevron-right"></i> Driver Registration</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="services.html#load-booking"><i class="fas fa-chevron-right"></i> Load Booking</a></li>
+            <li><a href="services.html#route-planning"><i class="fas fa-chevron-right"></i> Route Planning</a></li>
+            <li><a href="services.html#driver-support"><i class="fas fa-chevron-right"></i> Driver Support</a></li>
+            <li><a href="services.html#documentation"><i class="fas fa-chevron-right"></i> Documentation</a></li>
+            <li><a href="services.html#dispatch"><i class="fas fa-chevron-right"></i> 24/7 Dispatch</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <div class="footer-contact-item"><i class="fas fa-phone"></i><span>+92 300 1234567</span></div>
+          <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>dispatch@swifthaul.com</span></div>
+          <div class="footer-contact-item"><i class="fas fa-location-dot"></i><span>Lahore<br>Pakistan</span></div>
+          <div class="footer-contact-item"><i class="fas fa-clock"></i><span>Available 24/7</span></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 <span>SwiftHaul Dispatch</span>. All rights reserved.</p>
+        <p>Built for drivers, by people who care about the road.</p>
+      </div>
+    </div>
+  </footer>
+  <!-- ===== MODALS ===== -->
+
+<!-- Dispatcher Agreement Modal -->
+<div id="dispatcher-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:#1f2937; border:1px solid #374151; border-radius:12px; max-width:600px; width:100%; max-height:80vh; overflow-y:auto; padding:32px; position:relative;">
+    <button onclick="closeModal('dispatcher-modal')" style="position:absolute; top:16px; right:16px; background:#374151; border:none; color:#fff; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:18px; line-height:1;">✕</button>
+    <h2 style="color:#f97316; margin-bottom:8px; font-size:22px;">Dispatcher Agreement</h2>
+    <div style="color:#d1d5db; line-height:1.8; font-size:14px;">
+      <p style="margin-bottom:16px;">By registering with SwiftHaul Dispatch, you agree to the following terms:</p>
+      <h4 style="color:#f9fafb; margin-bottom:8px;">1. Services</h4>
+      <p style="margin-bottom:16px;">SwiftHaul will act as your dedicated dispatch representative with freight brokers and shippers. We will source loads, negotiate rates, and manage communication on your behalf.</p>
+      <h4 style="color:#f9fafb; margin-bottom:8px;">2. Fees & Billing</h4>
+      <p style="margin-bottom:16px;">Monthly dispatch fees apply as per your selected plan. Fees are billed at the start of each month. SwiftHaul charges a flat monthly fee only — we do not take a percentage of your load earnings.</p>
+      <h4 style="color:#f9fafb; margin-bottom:8px;">3. Termination</h4>
+      <p style="margin-bottom:16px;">Either party may terminate this agreement at any time with 7 days written notice. There are no long-term contracts or exit penalties.</p>
+      <h4 style="color:#f9fafb; margin-bottom:8px;">4. Liability</h4>
+      <p style="margin-bottom:16px;">SwiftHaul is not liable for load cancellations, delays, or payment disputes caused by third-party brokers or shippers. We will, however, assist in resolving such disputes on your behalf.</p>
+      <h4 style="color:#f9fafb; margin-bottom:8px;">5. Driver Responsibilities</h4>
+      <p style="margin-bottom:16px;">You confirm that all provided information is accurate, your vehicle has valid registration and insurance, and you hold a valid heavy vehicle driving license.</p>
+      <h4 style="color:#f9fafb; margin-bottom:8px;">6. Amendments</h4>
+      <p>SwiftHaul reserves the right to update these terms. Drivers will be notified of any changes via WhatsApp or email with at least 14 days notice.</p>
+    </div>
+    <button onclick="closeModal('dispatcher-modal')" style="margin-top:24px; background:#f97316; color:#fff; border:none; padding:10px 28px; border-radius:8px; cursor:pointer; font-size:14px; font-weight:600;">I Understand</button>
+  </div>
+</div>
+
+<!-- Privacy Policy Modal -->
+<div id="privacy-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:#1f2937; border:1px solid #374151; border-radius:12px; max-width:600px; width:100%; max-height:80vh; overflow-y:auto; padding:32px; position:relative;">
+    <button onclick="closeModal('privacy-modal')" style="position:absolute; top:16px; right:16px; background:#374151; border:none; color:#fff; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:18px; line-height:1;">✕</button>
+    <h2 style="color:#f97316; margin-bottom:8px; font-size:22px;">Privacy Policy</h2>
+    <div style="color:#d1d5db; line-height:1.8; font-size:14px;">
+      <p style="margin-bottom:16px;">SwiftHaul Dispatch is committed to protecting your personal information. This policy explains what we collect and how we use it.</p>
+      <h4 style="color:#f9fafb; margin-bottom:8px;">1. Information We Collect</h4>
+      <p style="margin-bottom:16px;">We collect your name, phone number, email address, CNIC number, driving license number, truck details, and preferred routes when you register or contact us.</p>
+      <h4 style="color:#f9fafb; margin-bottom:8px;">2. How We Use Your Data</h4>
+      <p style="margin-bottom:16px;">Your information is used solely for onboarding, dispatching, load matching, and communicating updates about our services. We do not use your data for unrelated marketing.</p>
+      <h4 style="color:#f9fafb; margin-bottom:8px;">3. Data Sharing</h4>
+      <p style="margin-bottom:16px;">We do not sell or rent your personal information to third parties. We may share limited information (such as your name and truck type) with verified brokers and shippers strictly for load booking purposes.</p>
+      <h4 style="color:#f9fafb; margin-bottom:8px;">4. Data Security</h4>
+      <p style="margin-bottom:16px;">Your data is stored securely and accessible only to authorised SwiftHaul staff. We take reasonable measures to protect your information from unauthorized access.</p>
+      <h4 style="color:#f9fafb; margin-bottom:8px;">5. Your Rights</h4>
+      <p style="margin-bottom:16px;">You may request to view, update, or delete your personal data at any time by contacting us at dispatch@swifthaul.com.</p>
+      <h4 style="color:#f9fafb; margin-bottom:8px;">6. Consent</h4>
+      <p>By submitting the registration form, you consent to the collection and use of your information as described in this policy.</p>
+    </div>
+    <button onclick="closeModal('privacy-modal')" style="margin-top:24px; background:#f97316; color:#fff; border:none; padding:10px 28px; border-radius:8px; cursor:pointer; font-size:14px; font-weight:600;">I Understand</button>
+  </div>
+</div>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileClose');
+    hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+    mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+    let currentStep = 1;
+
+    function showStep(step) {
+      document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step' + step).classList.add('active');
+      document.querySelectorAll('.progress-step').forEach((el, i) => {
+        el.classList.remove('active', 'done');
+        if (i + 1 < step) el.classList.add('done');
+        if (i + 1 === step) el.classList.add('active');
+      });
+      document.querySelectorAll('.progress-step.done .step-dot').forEach(dot => {
+        if (!dot.querySelector('i')) dot.innerHTML = '<i class="fas fa-check" style="font-size:0.75rem"></i>';
+      });
+      currentStep = step;
+    }
+
+    function validateStep(step) {
+      let valid = true;
+      const stepEl = document.getElementById('step' + step);
+      stepEl.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="number"], select').forEach(field => {
+        const group = field.closest('.form-group');
+        if (!group) return;
+        const label = group.querySelector('label');
+        if (label && label.querySelector('.required')) {
+          if (!field.value.trim()) {
+            group.classList.add('has-error');
+            valid = false;
+          } else {
+            group.classList.remove('has-error');
+          }
+        }
+      });
+      return valid;
+    }
+
+    function nextStep(step) {
+      if (!validateStep(step)) return;
+      if (step === 3) buildSummary();
+      showStep(step + 1);
+      document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function prevStep(step) {
+      showStep(step - 1);
+      document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function buildSummary() {
+      const fields = [
+        { label: 'Full Name', value: (document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value).trim() },
+        { label: 'Email', value: document.getElementById('email').value },
+        { label: 'Phone', value: document.getElementById('phone').value },
+        { label: 'License Number', value: document.getElementById('licenseNumber').value },
+        { label: 'Experience', value: document.getElementById('experience').value },
+        { label: 'Province', value: document.getElementById('province').value },
+        { label: 'CNIC Number', value: document.getElementById('cnicNumber').value },
+        { label: 'Truck Type', value: document.getElementById('truckType').value },
+        { label: 'Truck Make', value: document.getElementById('truckMake').value },
+        { label: 'No. of Trucks', value: document.getElementById('numTrucks').value },
+        { label: 'Rate Per KM', value: document.getElementById('ratePerKm').value },
+        { label: 'Preferred Plan', value: document.getElementById('preferredPlan').value },
+      ];
+      const content = document.getElementById('summaryContent');
+      content.innerHTML = fields.map(f => `
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+          <div style="font-size:0.72rem; font-weight:700; color:var(--text-gray); letter-spacing:0.5px; text-transform:uppercase; margin-bottom:3px;">${f.label}</div>
+          <div style="font-size:0.88rem; font-weight:600; color:var(--text-white);">${f.value || '—'}</div>
+        </div>
+      `).join('');
+    }
+
+    function submitForm() {
+  const terms = document.getElementById('termsCheck');
+  const termsErr = document.getElementById('termsError');
+  if (!terms.checked) { termsErr.style.display = 'block'; return; }
+  termsErr.style.display = 'none';
+
+  // Hide the entire registration section
+  document.querySelector('.registration-section').style.display = 'none';
+
+  // Show full-width success section
+  document.getElementById('fullSuccessSection').style.display = 'block';
+
+  // Scroll to top of success
+  document.getElementById('fullSuccessSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+    document.querySelectorAll('input, select, textarea').forEach(field => {
+      field.addEventListener('input', () => {
+        const group = field.closest('.form-group');
+        if (group) group.classList.remove('has-error');
+      });
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    function openModal(id) {
+    const modal = document.getElementById(id);
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    const modal = document.getElementById(id);
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  // Close modal if user clicks outside the box
+  document.addEventListener('click', function(e) {
+    ['dispatcher-modal', 'privacy-modal'].forEach(id => {
+      const modal = document.getElementById(id);
+      if (e.target === modal) closeModal(id);
+    });
+  });
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeModal('dispatcher-modal');
+      closeModal('privacy-modal');
+    }
+  });
+  </script>
+</body>
+</html>
